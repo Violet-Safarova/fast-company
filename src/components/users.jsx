@@ -8,15 +8,11 @@ const Users = () => {
   const createHeader = () => {
    return users.length <= 12 && users.length !== 0 ?
     (
-      <>
       <span className = {getBageClasses()}> {users.length} человек тусанет с тобой сегодня</span> 
-      </>
     )
      : 
     (
-      <>
       <span className = {getBageClasses()}> Никто не тусанет с тобой сегодня</span> 
-      </>
     )
   };
 
@@ -33,42 +29,42 @@ const Users = () => {
   function header() {
     return (
       users.length <= 12 && users.length !== 0 ? 
-      <tr key={0}>
+      <tr>
       <th scope="col">Имя</th>
       <th scope="col">Качества</th>
       <th scope="col">Профессия</th>
       <th scope="col">Встретился, раз</th>
       <th scope="col">Оценка</th>
-      <th scope="col"></th>
+      <th  scope="col"></th>
       </tr>
      :
-      <tr hidden></tr>
+      null 
     )
   }
 return  ( <>
-
   <h2>{createHeader(users.length)}</h2>
-  <table className = "table table-success table-striped"> {/*table table table-sm */}
+  <table className="table table table-sm">
   <thead>{header()}</thead>
-  
-<tbody>
-  { users.map(user=> { 
-  return ( 
-  <tr key={user._id}>
-   <td >{user.name}</td>
-   <td >{ user.qualities.map(quality => {
-     return <tr key={quality._id} className={`m-1 badge bg-${quality.color}`}>{quality.name}</tr>})
-     } </td>
-   <td>{user.profession.name}</td>
-   <td>{user.completedMeetings}</td>
-   <td>{user.rate}/5</td>
-   <td><button onClick={() => handleDecrement(user)} className ="btn btn-danger">Delete</button></td>
-  </tr>
+
+  <tbody>
+    {users.map(user=>{ 
+    return ( 
+    <tr key={user._id}>
+      <td>{user.name}</td>
+      <td>{ user.qualities.map(quality => {
+        return <p key={quality._id} className={`m-1 badge bg-${quality.color}`}>{quality.name}</p>})
+      }</td>
+      <td>{user.profession.name}</td>
+      <td>{user.completedMeetings}</td>
+      <td>{user.rate}/5</td>
+      <td><button onClick={()=>handleDecrement(user)} className ="btn btn-danger">Delete</button></td>
+    </tr>
+    )}
   )}
- )}
-</tbody>
+  </tbody>
 </table>
-</> )
+</> 
+)
 
 }
 export default Users;
